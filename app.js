@@ -12,12 +12,12 @@ app.use(bodyParser.json());
 //Firebase
 var firebase = require("firebase");
 var config = {
-    apiKey: "AIzaSyC_H-AOZdn5-EHDJZB0l8GIL02agno97-w",
-    authDomain: "yourpassion-a1364.firebaseapp.com",
-    databaseURL: "https://yourpassion-a1364.firebaseio.com",
-    projectId: "yourpassion-a1364",
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
     storageBucket: "",
-    messagingSenderId: "608079507689"
+    messagingSenderId: ""
 };
 firebase.initializeApp(config);
 var ref = firebase.database().ref("Users");
