@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Yon | Interests</title>
+	<%include ./assets/header %>
+	<%include ./assets/navbar %>
+	<link href="../css/style.css" rel="stylesheet">
+	<link href="../css/style-home.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container" id="display">
+	<h2>Please select your topics of interest : </h2>
+	<% for(var j in category){ %>
+	
+	<label><%= category[j].categoryData %>&nbsp;<input type="checkbox" id="<%= category[j].categoryData %>" onclick="decide(this.id)"></label>
+	<br>
+
+	<% } %>
+
+		
+	<a href="/home" class="btn btn-success">Go back</a>
+	</div>
+
+</body>
+<script type="text/javascript">
+
+			<% for(var j in interest){ %>
+				$("#<%= interest[j].interestData %>").attr("checked",true);
+			<% } %>
+
+
+		function decide(categoryData)
+		{
+
+			var data ={
+				interestData:categoryData
+			};
+			if($("#"+categoryData).is(':checked')==true)
+			{
+				$.ajax({
+					type:"POST",
+					url:"/add/interest",
+					data:data,
+					beforeSend:function(){
+					},
+					success: function(data){
+					},
+					error: function(data){
+					},
+					complete:function()
+					{
+					}
+				});
+			}
+			else
+			{
+				$.ajax({
+					type:"POST",
+					url:"/remove/interest",
+					data:data,
+					beforeSend:function()
+					{
+					},
+					success: function(data){
+					},
+					error: function(data){
+					},
+					complete:function()
+					{
+					}
+				});
+			}
+			
+		}
+
+</script>
+</html>

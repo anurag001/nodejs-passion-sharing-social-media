@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Passion | Home</title>
+		<%include ./assets/header %>
+		<%include ./assets/navbar %>
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="../css/style-home.css" rel="stylesheet">
+		<style>
+		pre{
+		    white-space: pre-wrap;       /* Since CSS 2.1 */
+		    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+		    white-space: -pre-wrap;      /* Opera 4-6 */
+		    white-space: -o-pre-wrap;    /* Opera 7 */
+		    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+		}
+		.content-wrap-view{
+		    white-space: pre-wrap;       /* Since CSS 2.1 */
+		    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+		    white-space: -pre-wrap;      /* Opera 4-6 */
+		    white-space: -o-pre-wrap;    /* Opera 7 */
+		    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+		}
+		.map{
+			width:100%;
+			height:250px; 
+		}
+		</style>
+		
+	</head>
+	<body>
+	<script>
+		// window.fbAsyncInit = function() {
+		// 	FB.init({
+		// 		appId      : '335776676873899',
+		// 		xfbml      : true,
+		// 		version    : 'v2.10'
+		// 	});
+		// 	FB.AppEvents.logPageView();
+		// };
+
+		// (function(d, s, id){
+		// 	var js, fjs = d.getElementsByTagName(s)[0];
+		// 	if (d.getElementById(id)) {return;}
+		// 	js = d.createElement(s); js.id = id;
+		// 	js.src = "//connect.facebook.net/en_US/sdk.js";
+		// 	fjs.parentNode.insertBefore(js, fjs);
+		// }(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div class="main-container positioner">
+		<div class="profile-trending-info col-lg-3 col-md-3 col-sm-4">
+			
+			<div class="profile-wrapper">
+				<div class="cover">
+					<div class="profile-pic">
+						<img src="/img/profile.svg" class="img-rounded" alt="profile pic">
+					</div>
+				</div>
+				<div class="user-data">
+					<span class="name"><%= user[0].name  %></span>
+					<div class="other-details-container">
+						<div class="gender other-details">
+							<div class="icon">
+								<i class="fa fa-female" style="color: #BBBBBB;"></i>
+							</div>
+							<div class="detail-value">F</div>
+						</div>
+						<div class="asked other-details">
+							<div class="icon">
+								<i class="fa fa-Post" style="color: #E3A4A4;"></i>
+							</div>
+							<div class="detail-value">24</div>
+						</div>
+						<div class="answered other-details">
+							<div class="icon">
+								<i class="fa fa-check" style="color: #AAECA0;"></i>
+							</div>
+							<div class="detail-value">389</div>
+						</div>
+					</div>
+					<div id="extra-details">
+						<a href="/edit" class="btn btn-info btn-block" ><strong>Edit profile</strong></a>
+						<br>
+						<a href="/interest" class="btn btn-primary btn-block"><strong>Choose Interests</strong></a>
+						<br>
+						<button class="btn btn-success btn-block" data-toggle="modal" data-target="#huntModal">Hunt</button>
+						<br>
+						<button class="btn btn-warning btn-block">People</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="trending-wrapper">
+				<div class="trending-header">
+					<div class="trending-header-text">
+						Trending
+					</div>
+					<div class="trending-right-icon">
+						<i class="right-icon fa fa-chevron-right"></i>
+					</div>
+				</div>
+				<div class="hr" style="width: calc(100% - 40px); height: 2px; margin: auto; background: #ececec;"></div>
+				
+				<div class="trending-Posts-container" id="trending-view">
+					
+				</div>
+			</div>
+			
+			<div class="apps" style="padding: 0;">
+				<div class="apps-container">
+					<div class="app-image">
+						<img src="/img/artboard.jpg">
+					</div>
+					<div class="app-desc">
+						Want to ask something? You are just a click away.
+					</div>
+					<div class="app-button">
+					<!-- Modal caller -->
+						<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#PostModal">
+						Share your Passion
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="post-app-wrapper col-lg-9 col-md-9 col-sm-8">
+			
+			<div class="apps col-lg-4">
+				<div class="apps-container">
+					<div class="app-image">
+						<img src="/img/artboard.jpg">
+					</div>
+					<div class="app-desc">
+						Want to ask something? You are just a click away.
+					</div>
+					<div class="app-button">
+					<!-- Modal caller -->
+						<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#postModal">
+						Share your Passion
+						</button>
+					</div>
+				</div>
+			</div>
+				
+			<!-- Feed Post Modal Box-->
+			<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Your Post/Youtube Video URL</h4>
+						</div>
+						<div class="modal-body">
+							<form method="post" id="post-form" enctype="multipart/form-data">
+								<textarea id="post-data" name="post_data" class="form-control" placeholder="" required></textarea>
+								<br>
+								<select id="category" name="category">
+									<option value="Art">Art</option>
+									<option value="Dance">Dance</option>
+									<option value="Knowledge">Knowledge</option>
+									<option value="Music">Music</option>
+									<option value="Sports">Sports</option>
+									<option value="Technology">Technology</option>
+								</select>
+								<br><br>
+								<input type="submit" class="btn btn-primary" value="Submit">
+							</form>
+							<br>
+							<div id="post-info"></div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--End Modal-->
+
+			<!-- Hunt Modal Box-->
+			<div class="modal fade" id="huntModal" tabindex="-1" role="dialog" aria-labelledby="huntModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="huntModalLabel">Talent Hunt across World</h4>
+						</div>
+						<div class="modal-body">
+							<form method="post" id="location">
+								<div class="row">
+									<div class="col-lg-5">
+										<input type="text" name="search" id="address" style="width:100%" class="form-control"  placeholder="Search Maps">
+									</div>
+									<div class="col-lg-1">
+										<span class="text" style="width:100%">Or</span>
+									</div>
+									<div class="col-lg-3">
+										<input type="text" name="latitude" style="width:100%" id="lat" class="form-control"  placeholder="Lattitude">
+									</div>
+									<div class="col-lg-3">
+										<input type="text" name="longitude" style="width:100%" id="lng" class="form-control" placeholder="Longitude">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-lg-12">
+										<div id="map" class="map"></div>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-lg-6">
+
+										<select id="category" name="category" style="width:100%">
+											<option value="Art">Art</option>
+											<option value="Dance">Dance</option>
+											<option value="Knowledge">Knowledge</option>
+											<option value="Music">Music</option>
+											<option value="Sports">Sports</option>
+											<option value="Technology">Technology</option>
+										</select>
+
+									</div>
+									<div class="col-lg-6">
+										<input type="text" id="distance" name="distance" class="form-control" placeholder="Distance(miles)" min="1" max="500" required="required">
+									</div>
+								</div>
+							</form>
+							<br>
+							<div class="row">
+								<div class="col-lg-4">
+									<button class="btn btn-warning" id="talent-hunt-submit">Search Talent</button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<div id="msg"></div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--End Modal-->
+
+			<div class="posts col-lg-8" id="feed-display">
+				
+			
+
+			</div>
+
+		</div>
+
+	</div>
+
+	</body>
+	<script type="text/javascript">
+
+		
+		var long=0;
+		var lat=0;
+
+		function getLocation() 
+		{
+		    if (navigator.geolocation)
+		    {
+				navigator.geolocation.getCurrentPosition(showPosition,showError);
+		    }
+		    else
+		    { 
+		    	alert("Geolocation is not supported by this browser.");
+		    }
+		}
+
+		function showPosition(position) {
+		    long =  position.coords.latitude;
+		    lat =  position.coords.longitude;
+		    
+		    var location = {
+				long:long,
+				lat:lat
+			};
+
+			$.ajax({
+				type:"POST",
+				url:"/get/location",
+				data:location,
+				beforeSend: function(){
+				},
+				success: function(){
+				},
+				error: function(data){
+					console.log(data.responseText);
+				}
+			});
+		}
+
+		function showError(error) 
+		{
+		    switch(error.code) 
+		    {
+		        case error.PERMISSION_DENIED:
+		            alert("User denied the request for Geolocation.");
+		            break;
+		        case error.POSITION_UNAVAILABLE:
+		            alert("Location information is unavailable.");
+		            break;
+		        case error.TIMEOUT:
+		            alert("The request to get user location timed out.");
+		            break;
+		        case error.UNKNOWN_ERROR:
+		            alert("An unknown error occurred.");
+		            break;
+	        }
+    	}
+
+
+		function findPeople() {
+		    
+			$.ajax({
+				type:"POST",
+				url:"/findpeople",
+				success: function(data){
+					$("#trending-view").html(data);
+				},
+				error: function(){
+					alert("Find People Error");
+				}
+			});
+		}
+
+		function displayFeed()
+		{
+			// var location = {
+			// 	long:long,
+			// 	lat:lat
+			// };
+
+			$.ajax({
+				type:"POST",
+				url:"/display/feed",
+				success: function(data){
+					$("#feed-display").html(data);
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
+
+		$("#post-form").on("submit",function(e){
+			e.preventDefault();
+
+			var postData = $("#post-data").val();
+			var category = $("#category").val();
+
+			$.ajax({
+				type:"POST",
+				url:"/feed/submit",
+				data:{post:postData,category:category},
+				success: function(data){
+					$("#post-info").html(data);
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+
+		});
+
+		window.onload = function(){
+			getLocation();
+			displayFeed();
+		};
+		
+		
+		
+		//Google map integration---------------------
+
+		//map
+			function initMap(){
+				var current = {lat: 22.78251239573235, lng: 86.19083404541016};
+				//create a new map
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 16,
+					center: current,
+					mapTypeId: google.maps.MapTypeId.HYBRID
+				});
+				map.setOptions({ draggableCursor: 'crosshair' });
+
+				//Create a new marker
+				marker = new google.maps.Marker({
+					position: current,
+					map: map,
+				});
+
+        		//drop marker on click
+				google.maps.event.addListener(map, 'click', function(event) {
+					if(marker){
+						marker.setMap(null);
+						marker = null;
+					}
+					marker = new google.maps.Marker({
+						position: event.latLng,
+						map: map,
+						draggable: true
+					});
+					document.getElementById('lat').value = event.latLng.lat();//display lat
+					document.getElementById('lng').value = event.latLng.lng();//display lng
+
+                 	document.getElementById('msg').innerHTML = "Selected: (" + event.latLng.lat() + ", " + event.latLng.lng() +") ";
+
+
+					localStorage.setItem("lat",event.latLng.lat());//save lat
+					localStorage.setItem("lng",event.latLng.lng());//save lng
+					var address = document.getElementById('address').value;
+					localStorage.setItem("address",address);
+					//DO NOT store values in DB now
+				 
+				});
+
+				//search box
+				var input = document.getElementById('address');
+        		var searchBox = new google.maps.places.SearchBox(input);
+
+        		// Bias the SearchBox results towards current map's viewport.
+				map.addListener('bounds_changed', function() {
+					searchBox.setBounds(map.getBounds());
+				});
+
+				//Change Location on the map
+				searchBox.addListener('places_changed', function() {
+					var places = searchBox.getPlaces();
+
+					if (places.length == 0) {
+						return;
+					}
+
+					// For each place, get the icon, name and location.
+					var bounds = new google.maps.LatLngBounds();
+					places.forEach(function(place) {
+						if (!place.geometry) {
+							return;
+						}
+						var icon = {
+							url: place.icon,
+							size: new google.maps.Size(71, 71),
+							origin: new google.maps.Point(0, 0),
+							anchor: new google.maps.Point(17, 34),
+							scaledSize: new google.maps.Size(25, 25)
+						};
+
+
+						if (place.geometry.viewport) {
+							// Only geocodes have viewport.
+							bounds.union(place.geometry.viewport);
+						} else {
+							bounds.extend(place.geometry.location);
+						}
+					});
+					map.fitBounds(bounds);
+				});
+
+				//on sumbitting lat/lng
+				var geocoder = new google.maps.Geocoder;
+				document.getElementById('location').addEventListener('submit', function(event){
+					event.preventDefault();
+					geocodeLatLng(geocoder, map, marker);
+				});
+			}
+
+			//change map on entering lat/lng
+			function geocodeLatLng(geocoder, map, marker) {
+				var lat = document.getElementById('lat').value;
+				var lng = document.getElementById('lng').value;
+				var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
+				geocoder.geocode({'location': latlng}, function(results, status) {//check the lat/lng
+					if (status === 'OK') {
+						if (results[0]) {
+							//map.setZoom(9);
+    						marker.setPosition(latlng);//change marker's position
+							map.panTo(latlng);//change map's location
+						} else {
+							document.getElementById('msg').innerHTML = "No results found.";
+						}
+					} else {
+						document.getElementById('msg').innerHTML = "Map failed due to: " + status;
+					}
+				});
+			}
+
+			
+
+			$("#talent-hunt-submit").click(function(e){
+				e.preventDefault();
+
+				var latitude = localStorage.getItem("lat");
+				var longitude = localStorage.getItem("lng");
+				var distance = $("#distance").val();
+				//var category = $("#category").val();
+
+				if(/^[0-9]*$/g.test(distance)==true)
+				{
+					// var data = {
+					// 	longitude:longitude,
+					// 	latitude:latitude,
+					// 	distance:distance,
+					// 	category:category
+					// };
+
+					var	data = $("#location").serialize();
+
+					$.ajax({
+						type:"POST",
+						url:"/talent",
+						data:data,
+						success: function(data){
+							$("#feed-display").html(data);
+						},
+						error: function(data){
+							console.log(data);
+						}
+					});
+				}
+				else
+				{
+					$("#msg").html("Distance in miles should be a number between 0 and 100");
+				}
+
+			});
+		
+	</script>
+	<%include ./assets/footer %>
+
+</html>

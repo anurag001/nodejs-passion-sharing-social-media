@@ -1,0 +1,33 @@
+        <% for(var x in postList){ %>
+				<div class="post1-container" style="border:2px solid #ddd;background:#fff;padding:5px; ">
+                    <div class="post1-question">
+                    <% if(postList[x].status=="video"){ %>
+                       <div class="embed-responsive embed-responsive-16by9">
+							<iframe style="max-width:inherit;max-height:300;" class="embed-responsive-item" src="https://www.youtube.com/embed/<%= postList[x].videoId %>" frameborder="0" allowfullscreen></iframe>
+						</div>
+					<% }else{ %>
+							<%= postList[x].post_data %>
+					<% } %>
+                    </div>
+                    <div class="post-details">
+                        <span class="likes"><i class="fa fa-thumbs-up"></i>&nbsp;24</span>
+                        <span class="views"><i class="fa fa-eye"></i>&nbsp;53</span>
+                        <span class="comment-count"><i class="fa fa-comment-o"></i></span>
+                        <div class="triple-dot-menu-container" tabindex="-1">
+                            <div class="triple-dot">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="triple-dot-menu">
+                                <div class="edit-question"><i class="fa fa-pencil"></i>Edit</div>
+                                <div class="delete-question"><i class="fa fa-close"></i>Delete</div>
+                                <div class="fb-share-question"><i class="fa fa-facebook"></i>Share on FB</div>
+                                <div class="twitter-share-question"><i class="fa fa-twitter"></i>Share on Twitter</div>
+                                <div class="report-question"><i class="fa fa-ban"></i>Report</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<br>
+			<%}%>
